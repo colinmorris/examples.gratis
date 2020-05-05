@@ -13,6 +13,8 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    // Parsing mdx pages
+    `gatsby-plugin-mdx`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

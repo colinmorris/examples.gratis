@@ -1,0 +1,23 @@
+---
+title: Tar examples
+---
+import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef } from '../components/commands'
+
+## Expand a `.tar.gz` file
+
+<CommandSession>
+<Command>ls</Command>
+<CommandOutput>fruits.tar.gz</CommandOutput>
+<Command>tar -<Flag kw={1}>x</Flag><Flag kw={2}>f</Flag> fruits.tar.gz</Command>
+<Command>ls</Command>
+<CommandOutput>apple.png banana.png canteloupe.png fruits.tar.gz</CommandOutput>
+</CommandSession>
+
+<Gloss>
+<Kw kw={1}>Expands</Kw> the contents of the <Kw kw={2}>file</Kw> <FileRef>fruits.tar.gz</FileRef> into the current directory.
+</Gloss>
+
+## Expand a `.tar` file
+
+<Command>tar -xf fruits.tar</Command>
+

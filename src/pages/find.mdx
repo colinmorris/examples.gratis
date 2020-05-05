@@ -1,0 +1,51 @@
+---
+title: Find examples
+---
+import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef } from '../components/commands'
+
+## Find by name
+
+<CommandSession>
+<Command>find . -name 'papaya*'</Command>
+<CommandOutput>./pictures/papaya.png
+./fruit_poetry/papaya.txt
+./games/papaya_simulator
+</CommandOutput>
+</CommandSession>
+
+Print the paths of files or directories under <Kw kw={1}>the current directory (`.`)</Kw> whose names begin with 'papaya'.
+
+## `-exec`
+
+The `-exec` option specifies some action to perform on each matching path.
+
+TODO: Should have some explanation of the {} and \; stuff. Probably best as tooltips?
+
+<CommandSession>
+<Command>find fruit_poetry -type f -exec wc -l {} \;</Command>
+<CommandOutput>
+8 fruit_poetry/papaya.txt
+6 fruit_poetry/pineapple.txt
+108 fruit_poetry/watermelon.txt
+</CommandOutput>
+</CommandSession>
+
+<Gloss>Count the number of lines per matching file using `wc`.
+</Gloss>
+
+## Find only files
+
+<CommandSession>
+<Command>find . -type f -name 'papaya*'</Command>
+<CommandOutput>./pictures/papaya.png
+./fruit_poetry/papaya.txt
+</CommandOutput>
+</CommandSession>
+
+## Find directories
+
+<CommandSession>
+<Command>find . -type d -name 'papaya*'</Command>
+<CommandOutput>./games/papaya_simulator
+</CommandOutput>
+</CommandSession>
