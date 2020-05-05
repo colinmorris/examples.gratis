@@ -1,4 +1,6 @@
-import React from "react"
+import React from "react";
+
+import { Popover } from 'antd';
 
 export const CommandSession = ({children}) => (
     <div className="command-session">
@@ -6,14 +8,22 @@ export const CommandSession = ({children}) => (
     </div>
 );
 
+const PROMPT = '$'
+
 // Rather than p to force newlines, should maybe consider css?
 // div might be better than p actually?
+// Maybe rename to be less ambiguous? BashCommand? ShellCommand?
 export const Command = ({children}) => (
-    <div><kbd>$ {children}</kbd></div>
+    <div><kbd>{PROMPT} {children}</kbd></div>
 );
 
+export const MultilineCommand = ({children}) => {
+  return (<pre>{children}</pre>);
+}
+
+// TODO: Maybe rename to just "Output" or "SampleOutput" or whatever? Not limited to bash commands
 export const CommandOutput = ({children}) => (
-    <div><samp>{children}</samp></div>
+    <pre><samp>{children}</samp></pre>
 );
 
 const colorForKey = (key) => {
@@ -36,6 +46,7 @@ export const Flag = KeySpan;
 
 export const Kw = KeySpan;
 
+// Probably overkill
 export const Gloss = ({children}) => (
     <p className="gloss">{children}</p>
 );
@@ -43,3 +54,13 @@ export const Gloss = ({children}) => (
 export const FileRef = ({children}) => (
     <code>{children}</code>
 );
+
+export const SourceAnnot = ({children, text}) => {
+  // TODO: parse text as markdown
+  const tt_content = (<p>{text}</p>);
+  return (
+    <Popover content={tt_content}>
+    {children}
+    </Popover>
+  );
+};

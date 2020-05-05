@@ -15,6 +15,10 @@ const IndexPage = () => (
       <Image />
     </div>
     <Link to="/page-2/">Go to page 2</Link>
+    <pre>This is a          test.{"\n"}
+    This should be on a new line.
+    And this.
+    </pre>
   </Layout>
 )
 

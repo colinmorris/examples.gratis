@@ -1,0 +1,64 @@
+---
+title: Bash for loop examples
+---
+import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef,
+  SourceAnnot, MultilineCommand
+} from '../components/commands'
+
+### Basic example
+
+<CommandSession>
+<MultilineCommand>
+for n in 1 2 3{'\n'}
+do{'\n'}
+    echo $n steamboat{'\n'}
+done
+</MultilineCommand>
+<CommandOutput>
+1 steamboat{'\n'}
+2 steamboat{'\n'}
+3 steamboat
+</CommandOutput>
+</CommandSession>
+
+### Single-line for loop
+
+<CommandSession>
+<Command>for n in 1 2 3; do echo $n steamboat; done
+</Command>
+<CommandOutput>
+1 steamboat
+2 steamboat
+3 steamboat
+</CommandOutput>
+</CommandSession>
+
+### Loop over lines of a file
+
+<CommandSession>
+<MultilineCommand>
+for line in $(cat fruit.txt)
+do
+    echo hello $line
+done
+</MultilineCommand>
+<CommandOutput>
+hello apple
+hello pear
+hello banana
+</CommandOutput>
+</CommandSession>
+
+### Loop over a range of numbers
+
+<CommandSession>
+<MultilineCommand>
+for line in $(seq 5)
+do
+    echo <SourceAnnot text="**-n**: do not output the trailing newline">-n</SourceAnnot> "$i "
+done
+</MultilineCommand>
+<CommandOutput>
+1 2 3 4 5
+</CommandOutput>
+</CommandSession>

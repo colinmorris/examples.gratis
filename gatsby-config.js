@@ -13,8 +13,14 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    // Parsing mdx pages
-    `gatsby-plugin-mdx`,
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        defaultLayouts: {
+          default: require.resolve("./src/components/layout.js"),
+        },
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

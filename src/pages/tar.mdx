@@ -3,7 +3,7 @@ title: Tar examples
 ---
 import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef } from '../components/commands'
 
-## Expand a `.tar.gz` file
+### Expand a `.tar.gz` file
 
 <CommandSession>
 <Command>ls</Command>
@@ -14,10 +14,38 @@ import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef } from
 </CommandSession>
 
 <Gloss>
-<Kw kw={1}>Expands</Kw> the contents of the <Kw kw={2}>file</Kw> <FileRef>fruits.tar.gz</FileRef> into the current directory.
+<Kw kw={1}>Extracts</Kw> the contents of the <Kw kw={2}>file</Kw> <FileRef>fruits.tar.gz</FileRef> into the current directory.
 </Gloss>
 
-## Expand a `.tar` file
+### Expand a `.tar` file
 
 <Command>tar -xf fruits.tar</Command>
 
+### Compress a directory
+
+<Command>tar -czf fruits.tar.gz fruits/</Command>
+
+<Gloss>
+<Kw kw={2}>Compresses</Kw> the directory  <code>fruits/</code> to create the file <code>fruits.tar.gz</code>.
+</Gloss>
+
+### Compress specific files
+
+TODO: typo? Should be x instead of v presumably?
+
+<Command>tar -cvf fruits.tar.gz apple.png banana.png canteloupe.png</Command>
+
+<Gloss>
+Creates a compressed tarball `fruits.tar.gz` containing the three specified image files.
+</Gloss>
+
+### List the contents of a tarball
+
+<CommandSession>
+<Command>tar -tf fruits.tar.gz</Command>
+<CommandOutput>
+apple.png
+banana.png
+canteloupe.png
+</CommandOutput>
+</CommandSession>
