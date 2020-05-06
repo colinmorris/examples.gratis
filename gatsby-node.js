@@ -56,6 +56,20 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   });
 };
 
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions;
+  if (node.internal.type === `Mdx`) {
+    const parts = node.fileAbsolutePath.split('/');
+    const rootIdx = parts.indexOf(CONTENT_ROOT_DIRECTORY);
+    const ancestry = parts.slice(rootIdx+1, parts.length-1);
+    createNodeField({
+      name: 'ancestry',
+      node,
+      value: ancestry,
+    });
+  }
+};
+
 // Import aliases
 // Copied from https://www.mrozilla.cz/blog/gatsby-eslint-vscode-import-alias/
 // cf. also https://www.gatsbyjs.org/packages/gatsby-alias-imports/
