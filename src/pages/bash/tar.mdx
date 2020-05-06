@@ -1,7 +1,32 @@
 ---
 title: Tar examples
 ---
-import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef } from '../components/commands'
+import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef } from '~components/commands'
+
+<pre>This is
+a test
+of      a pre.</pre>
+
+```
+and this is
+a test
+of     a fenced code block
+```
+
+<CommandOutput>Sample
+multiline
+output
+</CommandOutput>
+
+Same deal, with a template literal:
+
+<CommandOutput>{`
+Sample
+multiline
+output
+`}</CommandOutput>
+
+This is a test of a line mixing **MarkDown** with a <Kw kw={2}>custom component</Kw>.
 
 ### Expand a `.tar.gz` file
 

@@ -15,6 +15,9 @@ const IndexPage = () => (
       <Image />
     </div>
     <Link to="/page-2/">Go to page 2</Link>
+    <Link to="/bash/bash-for/">bash-for</Link>
+    <Link to="/bash/find/">find</Link>
+    <Link to="/bash/tar/">tar</Link>
     <pre>This is a          test.{"\n"}
     This should be on a new line.
     And this.
