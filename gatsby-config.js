@@ -16,16 +16,13 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `pages`,
-        path: `${__dirname}/src/pages`,
+        name: `content`,
+        path: `${__dirname}/content`,
       },
     },
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
-        defaultLayouts: {
-          default: require.resolve("./src/components/layout.js"),
-        },
         gatsbyRemarkPlugins: [`gatsby-remark-autolink-headers`],
         //remarkPlugins: [require("remark-autolink-headings")],
       },

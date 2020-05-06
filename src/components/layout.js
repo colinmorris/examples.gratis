@@ -15,7 +15,11 @@ import Col from 'antd/lib/col'
 
 
 import Header from "./header"
+// Stuff that came with starter
 import "./layout.css"
+
+// This is 716k. I'm beginning to regret my life choices. 560k minified.
+import 'antd/dist/antd.css';
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -30,7 +34,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <AntdLayout>
+      <AntdLayout className="layout">
         <AntdLayout.Header>
           <Header siteTitle={data.site.siteMetadata.title} />
         </AntdLayout.Header>
