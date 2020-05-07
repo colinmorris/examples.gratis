@@ -3,21 +3,16 @@ import { Link } from "gatsby"
 import { graphql } from "gatsby";
 
 import Layout from "../components/layout"
+import PageListing from '~components/pageListing';
 import Image from "../components/image"
 import SEO from "../components/seo"
 
 const IndexPage = ({ data }) => {
-  const links = data.allSitePage.edges.map( ({node}) => (
-    <li key={node.id}>
-      <Link to={node.path}>{node.path}</Link>
-    </li>
-  ));
+  const slugs = data.allSitePage.edges.map( (edge) => edge.node.path );
   return (
   <Layout>
     <SEO title="Home" />
-    <ul>
-      { links }
-    </ul>
+    <PageListing slugs={slugs} />
   </Layout>
   );
 }
