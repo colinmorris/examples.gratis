@@ -3,31 +3,6 @@ title: Tar examples
 ---
 import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef } from '~components/commands'
 
-<pre>This is
-a test
-of      a pre.</pre>
-
-```
-and this is
-a test
-of     a fenced code block
-```
-
-<CommandOutput>Sample
-multiline
-output
-</CommandOutput>
-
-Same deal, with a template literal:
-
-<CommandOutput>{`
-Sample
-multiline
-output
-`}</CommandOutput>
-
-This is a test of a line mixing **MarkDown** with a <Kw kw={2}>custom component</Kw>.
-
 ### Expand a `.tar.gz` file
 
 <CommandSession>
@@ -44,11 +19,15 @@ This is a test of a line mixing **MarkDown** with a <Kw kw={2}>custom component<
 
 ### Expand a `.tar` file
 
+<CommandSession>
 <Command>tar -xf fruits.tar</Command>
+</CommandSession>
 
 ### Compress a directory
 
+<CommandSession>
 <Command>tar -czf fruits.tar.gz fruits/</Command>
+</CommandSession>
 
 <Gloss>
 <Kw kw={2}>Compresses</Kw> the directory  <code>fruits/</code> to create the file <code>fruits.tar.gz</code>.
@@ -58,7 +37,9 @@ This is a test of a line mixing **MarkDown** with a <Kw kw={2}>custom component<
 
 TODO: typo? Should be x instead of v presumably?
 
+<CommandSession>
 <Command>tar -cvf fruits.tar.gz apple.png banana.png canteloupe.png</Command>
+</CommandSession>
 
 <Gloss>
 Creates a compressed tarball `fruits.tar.gz` containing the three specified image files.
@@ -68,9 +49,8 @@ Creates a compressed tarball `fruits.tar.gz` containing the three specified imag
 
 <CommandSession>
 <Command>tar -tf fruits.tar.gz</Command>
-<CommandOutput>
-apple.png
+<CommandOutput>{`apple.png
 banana.png
-canteloupe.png
+canteloupe.png`}
 </CommandOutput>
 </CommandSession>

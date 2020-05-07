@@ -3,9 +3,9 @@ import React from "react";
 import { Popover } from 'antd';
 
 export const CommandSession = ({children}) => (
-    <div className="command-session">
+    <pre className="command-session">
       {children}
-    </div>
+    </pre>
 );
 
 const PROMPT = '$'
@@ -18,12 +18,12 @@ export const Command = ({children}) => (
 );
 
 export const MultilineCommand = ({children}) => {
-  return (<pre>{children}</pre>);
+  return (<div>{children}</div>);
 }
 
 // TODO: Maybe rename to just "Output" or "SampleOutput" or whatever? Not limited to bash commands
 export const CommandOutput = ({children}) => (
-    <pre><samp>{children}</samp></pre>
+    <samp>{children}</samp>
 );
 
 const colorForKey = (key) => {

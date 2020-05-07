@@ -1,15 +1,17 @@
 ---
 title: Find examples
 ---
-import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef } from '~components/commands'
+import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef,
+  SourceAnnot
+} from '~components/commands'
 
 ## Find by name
 
 <CommandSession>
-<Command>find . -name 'papaya*'</Command>
-<CommandOutput>./pictures/papaya.png
+<Command>find <Kw kw={1}>.</Kw> -name 'papaya*'</Command>
+<CommandOutput>{`./pictures/papaya.png
 ./fruit_poetry/papaya.txt
-./games/papaya_simulator
+./games/papaya_simulator`}
 </CommandOutput>
 </CommandSession>
 
@@ -22,11 +24,12 @@ The `-exec` option specifies some action to perform on each matching path.
 TODO: Should have some explanation of the {} and \; stuff. Probably best as tooltips?
 
 <CommandSession>
-<Command>find fruit_poetry -type f -exec wc -l {} \;</Command>
-<CommandOutput>
-8 fruit_poetry/papaya.txt
+<Command>find fruit_poetry -type f -exec wc -l <SourceAnnot
+  text={'`{}` is a placeholder representing the filename being processed'}
+  >{'{}'}</SourceAnnot> \;</Command>
+<CommandOutput>{`8 fruit_poetry/papaya.txt
 6 fruit_poetry/pineapple.txt
-108 fruit_poetry/watermelon.txt
+108 fruit_poetry/watermelon.txt`}
 </CommandOutput>
 </CommandSession>
 
@@ -37,8 +40,8 @@ TODO: Should have some explanation of the {} and \; stuff. Probably best as tool
 
 <CommandSession>
 <Command>find . -type f -name 'papaya*'</Command>
-<CommandOutput>./pictures/papaya.png
-./fruit_poetry/papaya.txt
+<CommandOutput>{`./pictures/papaya.png
+./fruit_poetry/papaya.txt`}
 </CommandOutput>
 </CommandSession>
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Anchor } from 'antd';
 
+import 'antd/dist/antd.css';
+
 const { Link } = Anchor;
 
 export default function FloatingAnchorNav( { headings, tableOfContents } ) {

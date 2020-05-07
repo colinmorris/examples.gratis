@@ -1,0 +1,44 @@
+---
+title: Sort examples
+---
+import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef } from '~components/commands'
+
+`sort` sorts the lines of a file.
+
+<CommandSession>
+<Command>cat fruit.txt</Command>
+<CommandOutput>{`apple
+pear
+banana`}
+</CommandOutput>
+<Command>sort fruit.txt</Command>
+<CommandOutput>{`apple
+banana
+pear`}
+</CommandOutput>
+</CommandSession>
+
+## Sorting numerically
+
+<CommandSession>
+<Command>cat numbers.txt</Command>
+<CommandOutput>{`32
+10
+200`}
+</CommandOutput>
+<Command>sort -n numbers.txt</Command>
+<CommandOutput>{`10
+32
+200`}
+</CommandOutput>
+</CommandSession>
+
+## `-r`, sorting in reverse
+
+<CommandSession>
+<Command>sort -r -n numbers.txt</Command>
+<CommandOutput>{`200
+32
+10`}
+</CommandOutput>
+</CommandSession>

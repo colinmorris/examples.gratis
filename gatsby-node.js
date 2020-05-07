@@ -50,7 +50,11 @@ const createCategoryPages = (createPage, edges) => {
   const cats = edges.reduce( (acc, {node}) => {
     const cat = node.fields.category;
     if (!(cat in acc)) {
-      acc[cat] = {cat: cat, ancestry: node.fields.ancestry, pages: []};
+      acc[cat] = {
+        cat: cat, 
+        ancestry: node.fields.ancestry, 
+        pages: []
+      };
     }
     acc[cat].pages.push(node.fields.slug);
     return acc;
