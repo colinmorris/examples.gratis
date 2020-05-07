@@ -21,7 +21,7 @@ import "./layout.css"
 // This is 716k. I'm beginning to regret my life choices. 560k minified.
 import 'antd/dist/antd.css';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, sidebar }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -50,9 +50,11 @@ const Layout = ({ children }) => {
               <main>{children}</main>
             </div>
           </AntdLayout.Content>
+          { sidebar &&
           <AntdLayout.Sider>
-            This is where the ToC would go.
+            {sidebar}
           </AntdLayout.Sider>
+          }
         </AntdLayout>
       </AntdLayout>
     </>

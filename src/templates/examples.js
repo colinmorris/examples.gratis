@@ -4,13 +4,21 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 
 import Layout from '~components/layout';
 import Breadcrumbs from '~components/breadcrumbs';
+import FloatingAnchorNav from '~components/toc';
 
 export default function Examples({
   data: { mdx },
   pageContext,
 }) {
+  // TODO: sort of hacky way of doing this.
+  const sidebar = (
+    <FloatingAnchorNav
+      headings={mdx.headings}
+      tableOfContents={mdx.tableOfContents.items}
+    />
+  );
   return (
-      <Layout>
+      <Layout sidebar={sidebar}>
         <Breadcrumbs ancestry={mdx.fields.ancestry} />
 
         <h1>{mdx.frontmatter.title}</h1>
@@ -25,6 +33,11 @@ export const pageQuery = graphql`
     mdx(id: { eq: $id}) {
       id
       body
+      headings {
+        depth
+          value
+      }
+      tableOfContents
       frontmatter {
         title
       }
