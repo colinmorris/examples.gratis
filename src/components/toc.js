@@ -6,7 +6,6 @@ import 'antd/dist/antd.css';
 const { Link } = Anchor;
 
 export default function FloatingAnchorNav( { headings, tableOfContents } ) {
-  console.log(headings, tableOfContents);
   console.assert(headings.length === tableOfContents.length);
   const f = (i, end) => {
     if (i >= end || i === -1) return;

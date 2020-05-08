@@ -1,14 +1,21 @@
 ---
 title: Tar examples
 ---
-import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef } from '~components/commands'
+import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef,
+  SourceAnnot,
+} from '~components/commands'
 
 ### Expand a `.tar.gz` file
 
 <CommandSession>
 <Command>ls</Command>
 <CommandOutput>fruits.tar.gz</CommandOutput>
-<Command>tar -<Flag kw={1}>x</Flag><Flag kw={2}>f</Flag> fruits.tar.gz</Command>
+<Command>tar -<Flag 
+  short='x' long='extract' gloss='extract files from an archive' kw={1}
+  >x</Flag><Flag
+  short='f' long='file' 
+  kw={2}
+  >f</Flag> fruits.tar.gz</Command>
 <Command>ls</Command>
 <CommandOutput>apple.png banana.png canteloupe.png fruits.tar.gz</CommandOutput>
 </CommandSession>
@@ -26,19 +33,21 @@ import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef } from
 ### Compress a directory
 
 <CommandSession>
-<Command>tar -czf fruits.tar.gz fruits/</Command>
+<Command>tar -<Flag
+  kw={2} short='c' long='create' gloss='create a new archive'
+>c</Flag><Flag
+  kw={3} short='z' long='gzip' gloss='use gzip compression'
+>z</Flag>f fruits.tar.gz fruits/</Command>
 </CommandSession>
 
 <Gloss>
-<Kw kw={2}>Compresses</Kw> the directory  <code>fruits/</code> to create the file <code>fruits.tar.gz</code>.
+<Kw kw={3}>Compresses</Kw> the directory  <code>fruits/</code> to <Kw kw={2}>create</Kw> the file <code>fruits.tar.gz</code>.
 </Gloss>
 
 ### Compress specific files
 
-TODO: typo? Should be x instead of v presumably?
-
 <CommandSession>
-<Command>tar -cvf fruits.tar.gz apple.png banana.png canteloupe.png</Command>
+<Command>tar -cxf fruits.tar.gz apple.png banana.png canteloupe.png</Command>
 </CommandSession>
 
 <Gloss>
@@ -48,7 +57,9 @@ Creates a compressed tarball `fruits.tar.gz` containing the three specified imag
 ### List the contents of a tarball
 
 <CommandSession>
-<Command>tar -tf fruits.tar.gz</Command>
+<Command>tar -<Flag
+  kw={1} short='t' long='list' gloss='list the contents of an archive'
+>t</Flag>f fruits.tar.gz</Command>
 <CommandOutput>{`apple.png
 banana.png
 canteloupe.png`}

@@ -1,0 +1,30 @@
+---
+title: Sort examples
+---
+import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef } from '~components/commands'
+
+## Create a symlink
+
+<CommandSession>
+<Command>ln -s ../foo/README.txt .</Command>
+</CommandSession>
+
+Creates a symbolic link in the current directory called `README.txt` which points to the file `../foo/README.txt`.
+
+## Create a symlink with a different name
+
+<CommandSession>
+<Command>ln -s ../foo/README.txt readme.md</Command>
+</CommandSession>
+
+Creates a symbolic link in the current directory called `readme.md` which points to the file `../foo/README.txt`.
+
+## Symlink a directory
+
+Making a link to a directory uses the same syntax as for a file.
+
+<CommandSession>
+<Command>ln -s ../foo/ .</Command>
+</CommandSession>
+
+Creates a symbolic link in the current directory called `foo` which points to the directory `../foo`.

@@ -32,17 +32,50 @@ const colorForKey = (key) => {
       return 'green';
     case 2:
       return 'tomato';
+    case 3:
+      return 'rebeccapurple';
     default:
       console.warn('Unexpected kw ', key);
       return 'yellow';
   }
 };
 
-const KeySpan = ({children, kw}) => (
-    <span style={{color: colorForKey(kw)}}>{children}</span>
+const KeySpan = ({children, kw, ...props}) => (
+    <span style={{color: colorForKey(kw)}} {...props}>{children}</span>
 );
 
-export const Flag = KeySpan;
+//export const Flag = KeySpan;
+
+export const Flag = ({children, short, long, gloss, kw, ...props}) => {
+  let flagText = '';
+  if (short) {
+    flagText += '-' + short + ', ';
+  }
+  if (long) {
+    flagText += '--' + long + ', ';
+  }
+  if (flagText) {
+    flagText = flagText.slice(0, flagText.length-2);
+  }
+  const ttContent = (
+      <>
+      {flagText && <p className="flags">{flagText}</p>}
+      {gloss && <p>{gloss}</p>}
+      </>
+  );
+  const inner = (
+      <KeySpan kw={kw} {...props}>{children}</KeySpan>
+  );
+  if (flagText || gloss) {
+    return (
+      <Popover content={ttContent}>
+        {inner}
+      </Popover>
+    );
+  } else {
+    return inner;
+  }
+};
 
 export const Kw = KeySpan;
 
