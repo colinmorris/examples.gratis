@@ -21,6 +21,7 @@ import './base.css';
 
 // This is 716k. I'm beginning to regret my life choices. 560k minified.
 import 'antd/dist/antd.css';
+//import 'antd/es/layout/style/index.css';
 
 const Layout = ({ children, sidebar }) => {
   const data = useStaticQuery(graphql`

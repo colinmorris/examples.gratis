@@ -1,7 +1,8 @@
 import React from 'react';
 import { Anchor } from 'antd';
 
-import 'antd/dist/antd.css';
+//import 'antd/dist/antd.css';
+import 'antd/es/anchor/style/index.css';
 
 const { Link } = Anchor;
 
