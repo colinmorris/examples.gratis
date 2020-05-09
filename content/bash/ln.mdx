@@ -1,15 +1,20 @@
 ---
 title: Sort examples
 ---
-import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef } from '~components/commands'
+import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef,
+  SourceAnnot
+} from '~components/commands'
 
 ## Create a symlink
 
+
 <CommandSession>
-<Command>ln -s ../foo/README.txt .</Command>
+<Command>ln <Flag
+  kw={1} short='s' long='symbolic'
+>-s</Flag> ../foo/README.txt <SourceAnnot kw={2}>.</SourceAnnot></Command>
 </CommandSession>
 
-Creates a symbolic link in the current directory called `README.txt` which points to the file `../foo/README.txt`.
+Creates a <Kw kw={1}>symbolic</Kw> link in the <Kw kw={2}>current directory</Kw> called `README.txt` which points to the file `../foo/README.txt`.
 
 ## Create a symlink with a different name
 

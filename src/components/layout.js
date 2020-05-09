@@ -16,7 +16,8 @@ import Col from 'antd/lib/col'
 
 import Header from "./header"
 // Stuff that came with starter
-import "./layout.css"
+//import "./layout.css"
+import './base.css';
 
 // This is 716k. I'm beginning to regret my life choices. 560k minified.
 import 'antd/dist/antd.css';

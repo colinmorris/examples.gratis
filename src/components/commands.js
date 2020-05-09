@@ -2,13 +2,17 @@ import React from "react";
 
 import { Popover } from 'antd';
 
+import './commands.css';
+
 export const CommandSession = ({children}) => (
     <pre className="command-session">
       {children}
     </pre>
 );
 
-const PROMPT = '$'
+const PROMPT_SYMBOL  = '$'
+
+const PROMPT = (<span className="command-prompt">{PROMPT_SYMBOL}</span>);
 
 // Rather than p to force newlines, should maybe consider css?
 // div might be better than p actually?
@@ -17,8 +21,27 @@ export const Command = ({children}) => (
     <div><kbd>{PROMPT} {children}</kbd></div>
 );
 
+// TODO: This could probably be merged with Command
+// Though it could be nice to automatically insert line continuation '>' characters
+// (and may want some special styling for them)
+//export const MultilineCommand = Command;
 export const MultilineCommand = ({children}) => {
-  return (<div>{children}</div>);
+  console.log(children);
+  const transformed = React.Children.map(children, (child, i) => {
+    if (typeof(child) !== 'string') {
+      return child;
+    }
+    const lines = child.split('\n').map( (line, lineIx) => {
+      let pre = '> ';
+      if (lineIx === 0) {
+        //pre = (i === 0) ? PROMPT + ' ' : '';
+        pre = '';
+      }
+      return pre + line;
+    });
+    return lines.join('\n');
+  });
+  return (<div><kbd>{transformed}</kbd></div>);
 }
 
 // TODO: Maybe rename to just "Output" or "SampleOutput" or whatever? Not limited to bash commands
@@ -34,15 +57,35 @@ const colorForKey = (key) => {
       return 'tomato';
     case 3:
       return 'rebeccapurple';
+    case undefined:
+      return 'dimgray';
     default:
       console.warn('Unexpected kw ', key);
       return 'yellow';
   }
 };
 
-const KeySpan = ({children, kw, ...props}) => (
-    <span style={{color: colorForKey(kw)}} {...props}>{children}</span>
-);
+const KeySpan = ({children, kw, ...props}) => {
+    let lineStyle = kw ? 'solid' : 'dotted';
+    if (kw === 0) {
+      // TODO: maybe still show underline on hover in this case?
+      lineStyle = 'none';
+    }
+    const style = {
+      borderBottom: `.15em ${lineStyle} ${colorForKey(kw)}`,
+      paddingBottom: '0.2em',
+    };
+    // NB: When using antd popover, it inserts its own event handlers for
+    // onMouseEnter etc.
+    return (
+    <span 
+      style={style}
+      {...props}
+    >
+      {children}
+    </span>
+    );
+};
 
 //export const Flag = KeySpan;
 
@@ -80,20 +123,22 @@ export const Flag = ({children, short, long, gloss, kw, ...props}) => {
 export const Kw = KeySpan;
 
 // Probably overkill
-export const Gloss = ({children}) => (
-    <p className="gloss">{children}</p>
+export const Gloss = ({children, ...props}) => (
+    <p className="gloss" {...props}>{children}</p>
 );
 
 export const FileRef = ({children}) => (
     <code>{children}</code>
 );
 
-export const SourceAnnot = ({children, text}) => {
+export const SourceAnnot = ({children, text, ...props}) => {
   // TODO: parse text as markdown
   const tt_content = (<p>{text}</p>);
   return (
     <Popover content={tt_content}>
-    {children}
+      <KeySpan {...props}>
+        {children}
+      </KeySpan>
     </Popover>
   );
 };

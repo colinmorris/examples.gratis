@@ -1,0 +1,58 @@
+---
+title: Cut examples
+---
+import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef,
+  SourceAnnot
+} from '~components/commands'
+
+## Basic example
+
+<CommandSession>
+<Command>cut <Flag 
+  kw={1} short='d' long='delimiter' gloss='use given string as field separator (defaults to tab character)'
+  >-d ','</Flag> <Flag
+  kw={2} short='f' long='fields' gloss='select these fields (counting from 1)'
+  >-f 2</Flag> fruit.csv</Command>
+<CommandOutput>
+{`price
+0.79
+1.00
+0.33`}
+</CommandOutput>
+</CommandSession>
+
+Print the <Kw kw={2}>first</Kw> column of a <Kw kw={1}>comma-separated</Kw> file.
+
+## Multiple fields
+
+<CommandSession>
+<Command>cut <Flag 
+  kw={0} short='d' long='delimiter' gloss='use given string as field separator (defaults to tab character)'
+  >-d ','</Flag> <Flag
+  kw={2} short='f' long='fields' gloss='select these fields (counting from 1)'
+  >-f 1-3</Flag> fruit.csv</Command>
+<CommandOutput>
+{`fruit,price,calories
+banana,0.79,60
+mango,1.00,95
+lime,0.33,5`}
+</CommandOutput>
+</CommandSession>
+
+Print <Kw kw={2}>columns 1 through 3</Kw>.
+
+<CommandSession>
+<Command>cut <Flag 
+  kw={0} short='d' long='delimiter' gloss='use given string as field separator (defaults to tab character)'
+  >-d ','</Flag> <Flag
+  kw={2} short='f' long='fields' gloss='select these fields (counting from 1)'
+  >-f 2-</Flag> fruit.csv</Command>
+<CommandOutput>
+{`price,calories,genus
+banana,0.79,60,musa
+mango,1.00,95,mangifera
+lime,0.33,5,citrus`}
+</CommandOutput>
+</CommandSession>
+
+Print <Kw kw={2}>from the second column to the end</Kw>.

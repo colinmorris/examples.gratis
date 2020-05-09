@@ -9,16 +9,15 @@ import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef,
 ### Basic example
 
 <CommandSession>
-<MultilineCommand>
-for n in 1 2 3{'\n'}
-do{'\n'}
-    echo $n steamboat{'\n'}
-done
+<MultilineCommand>{`for n in 1 2 3
+do
+    echo $n steamboat
+done`}
 </MultilineCommand>
-<CommandOutput>
-1 steamboat{'\n'}
-2 steamboat{'\n'}
-3 steamboat
+<CommandOutput
+>{`1 steamboat
+2 steamboat
+3 steamboat`}
 </CommandOutput>
 </CommandSession>
 
@@ -27,26 +26,26 @@ done
 <CommandSession>
 <Command>for n in 1 2 3; do echo $n steamboat; done
 </Command>
-<CommandOutput>
-1 steamboat
+<CommandOutput
+>{`1 steamboat
 2 steamboat
-3 steamboat
+3 steamboat`}
 </CommandOutput>
 </CommandSession>
 
 ### Loop over lines of a file
 
 <CommandSession>
-<MultilineCommand>
-for line in $(cat fruit.txt)
+<MultilineCommand
+>{`for line in $(cat fruit.txt)
 do
     echo hello $line
-done
+done`}
 </MultilineCommand>
 <CommandOutput>
-hello apple
+{`hello apple
 hello pear
-hello banana
+hello banana`}
 </CommandOutput>
 </CommandSession>
 
@@ -54,10 +53,12 @@ hello banana
 
 <CommandSession>
 <MultilineCommand>
-for line in $(seq 5)
+{`for line in $(seq 5)
 do
-    echo <SourceAnnot text="**-n**: do not output the trailing newline">-n</SourceAnnot> "$i "
-done
+    echo `}
+<SourceAnnot text="**-n**: do not output the trailing newline">-n</SourceAnnot>
+{` "$i "
+done`}
 </MultilineCommand>
 <CommandOutput>
 1 2 3 4 5

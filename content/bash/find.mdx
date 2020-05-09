@@ -8,25 +8,25 @@ import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef,
 ## Find by name
 
 <CommandSession>
-<Command>find <Kw kw={1}>.</Kw> -name 'papaya*'</Command>
+<Command>find <Kw kw={1}>.</Kw> <Flag kw={2}>-name 'papaya*'</Flag></Command>
 <CommandOutput>{`./pictures/papaya.png
 ./fruit_poetry/papaya.txt
 ./games/papaya_simulator`}
 </CommandOutput>
 </CommandSession>
 
-Print the paths of files or directories under <Kw kw={1}>the current directory (`.`)</Kw> whose names begin with 'papaya'.
+Print the paths of files or directories under <Kw kw={1}>the current directory (`.`)</Kw> whose names <Kw kw={2}>begin with 'papaya'</Kw>.
 
 ## `-exec`
 
 The `-exec` option specifies some action to perform on each matching path.
 
-TODO: Should have some explanation of the {} and \; stuff. Probably best as tooltips?
-
 <CommandSession>
 <Command>find fruit_poetry -type f -exec wc -l <SourceAnnot
   text={'`{}` is a placeholder representing the filename being processed'}
-  >{'{}'}</SourceAnnot> \;</Command>
+  >{'{}'}</SourceAnnot> <SourceAnnot 
+  text="`\;` marks the end of the command to perform"
+  >\;</SourceAnnot></Command>
 <CommandOutput>{`8 fruit_poetry/papaya.txt
 6 fruit_poetry/pineapple.txt
 108 fruit_poetry/watermelon.txt`}
@@ -39,7 +39,7 @@ TODO: Should have some explanation of the {} and \; stuff. Probably best as tool
 ## Find only files
 
 <CommandSession>
-<Command>find . -type f -name 'papaya*'</Command>
+<Command>find . <Flag kw={1}>-type f</Flag> -name 'papaya*'</Command>
 <CommandOutput>{`./pictures/papaya.png
 ./fruit_poetry/papaya.txt`}
 </CommandOutput>
@@ -48,7 +48,7 @@ TODO: Should have some explanation of the {} and \; stuff. Probably best as tool
 ## Find directories
 
 <CommandSession>
-<Command>find . -type d -name 'papaya*'</Command>
+<Command>find . <Flag kw={1}>-type d</Flag> -name 'papaya*'</Command>
 <CommandOutput>./games/papaya_simulator
 </CommandOutput>
 </CommandSession>
