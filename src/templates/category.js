@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 import Layout from '~components/layout';
 import PageListing from '~components/pageListing';
@@ -11,6 +12,10 @@ export default function Category(
 
   return (
     <Layout>
+      <Helmet
+        title={ `${category} examples directory` }
+        description={ `Directory of basic ${category} examples.` }
+      />
       <Breadcrumbs ancestry={ancestry} />
       <h1>{category} examples</h1>
       <PageListing slugs={containedSlugs} />

@@ -3,13 +3,12 @@ import { graphql } from "gatsby";
 
 import Layout from "../components/layout"
 import PageListing from '~components/pageListing';
-import SEO from "../components/seo"
 
 const IndexPage = ({ data }) => {
   const slugs = data.allSitePage.edges.map( (edge) => edge.node.path );
   return (
   <Layout>
-    <SEO title="Home" />
+    <p>(This page is mostly for debugging. How did you even get here?)</p>
     <PageListing slugs={slugs} />
   </Layout>
   );

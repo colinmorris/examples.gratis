@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql } from "gatsby";
+import { Helmet } from 'react-helmet';
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
@@ -37,11 +38,28 @@ export default function Examples({
     />
   );
   // TODO: wrap provide shortcodes.
+  const front = mdx.frontmatter;
+  const title = front.title;
+  let desc = front.description;
+  if (!desc && front.command) {
+    desc = `Basic examples of the unix command ${front.command}.`;
+  } else {
+    console.warn("Couldn't generate meta description for");
+  }
   return (
       <Layout sidebar={sidebar}>
+        <Helmet
+          title={title}
+          meta={[
+            {
+              name: `description`,
+              content: desc,
+            },
+          ]}
+        />
         <Breadcrumbs ancestry={mdx.fields.ancestry} />
 
-        <h1>{mdx.frontmatter.title}</h1>
+        <h1>{title}</h1>
         
         <MDXProvider components={components}>
           <MDXRenderer>{mdx.body}</MDXRenderer>
@@ -62,6 +80,8 @@ export const pageQuery = graphql`
       tableOfContents
       frontmatter {
         title
+        description
+        command
       }
       fields {
         ancestry

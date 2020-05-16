@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql } from "gatsby";
+import { Helmet } from 'react-helmet';
 
 import Layout from '~components/layout';
 
@@ -11,6 +12,9 @@ export default function MdPage({
   const { frontmatter, html } = markdownRemark
   return (
       <Layout>
+        <Helmet
+          title={ frontmatter.title }
+        />
 
         <h1>{frontmatter.title}</h1>
 
