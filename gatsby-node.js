@@ -5,8 +5,6 @@
  */
 const path = require("path");
 
-// TODO: It's a small thing, but would like to be DRY-esque about this, since it's
-// also used in gatsby-config.js...
 const CONTENT_ROOT_DIRECTORY = "content";
 const CONTENT_URL_ROOT = "/";
 
@@ -14,8 +12,7 @@ const CONTENT_URL_ROOT = "/";
 // as starting point.
 exports.createPages = async (helpers) => {
   const { graphql, actions, reporter } = helpers;
-  // Destructure the createPage function from the actions object
-  const { createPage } = actions
+  const { createPage } = actions;
 
   const result = await graphql(`
     query {
@@ -25,7 +22,7 @@ exports.createPages = async (helpers) => {
             id
             fileAbsolutePath
             frontmatter {
-              slug # optional
+              slug # optional (nb: not actually a slug. rather, a replacement string for the final /-delimited part of the slug)
             }
             fields {
               ancestry
@@ -49,6 +46,11 @@ exports.createPages = async (helpers) => {
   createHomePage(createPage, reporter);
 }
 
+/* A bit of a hack. In development, I want this to be a listing of all pages on the site
+   (for convenient debugging). In production, make it a copy of /about. (Probably more
+   correct to make it a redirect, but that's more complicated, and requires some plugin
+   specific to my deployment target.)
+*/
 const createHomePage = (createPage, reporter) => {
   const env = process.env.NODE_ENV;
   if (env === 'production') {
@@ -67,6 +69,10 @@ const createHomePage = (createPage, reporter) => {
   }
 };
 
+/* Create pages corresponding to .md files living in src/pages.
+   URL is determined entirely by the 'slug' field in the md frontmatter (does not
+   care about the filename or path)
+*/
 const createExtraMdPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
   const result = await graphql(`
@@ -92,13 +98,15 @@ const createExtraMdPages = async ({ graphql, actions, reporter }) => {
       path: node.frontmatter.slug,
       component: path.resolve('./src/templates/md.js'),
       context: {
-        // additional data can be passed via context
         slug: node.frontmatter.slug,
       },
     });
   });
 };
 
+/* Create pages like /bash/, /python/, /python/pandas/, etc. corresponding to 
+   categories (i.e. internal nodes in the content tree).
+*/
 const createCategoryPages = (createPage, edges) => {
   const cats = edges.reduce( (acc, {node}) => {
     const cat = node.fields.category;
@@ -126,6 +134,8 @@ const createCategoryPages = (createPage, edges) => {
   });
 };
 
+/* Create the main content pages (examples).
+*/
 const createExamplePages = (createPage, edges) => {
   edges.forEach(({ node }, index) => {
     createPage({
@@ -173,9 +183,13 @@ exports.onCreateNode = ({ node, getNode, actions, reporter }) => {
   }
 };
 
-// Import aliases
-// Copied from https://www.mrozilla.cz/blog/gatsby-eslint-vscode-import-alias/
-// cf. also https://www.gatsbyjs.org/packages/gatsby-alias-imports/
+/* Import aliases. So I can write something like...
+      import Layout from '~components/layout';
+   No matter where I am in the file tree. Don't have to futz around with a bunch
+   of brittle ../'s in relative imports.
+   Copied from https://www.mrozilla.cz/blog/gatsby-eslint-vscode-import-alias/
+   cf. also https://www.gatsbyjs.org/packages/gatsby-alias-imports/
+*/
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {

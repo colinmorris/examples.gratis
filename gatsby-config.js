@@ -5,7 +5,9 @@ module.exports = {
     author: `colin`,
   },
   plugins: [
+    // helper for dealing with <head> tags
     `gatsby-plugin-react-helmet`,
+    // Source mdx files under content/
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -13,21 +15,24 @@ module.exports = {
         path: `${__dirname}/content`,
       },
     },
+    // Extra plain markdown pages living under src/pages
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `content`,
+        name: `extraMdPages`,
         path: `${__dirname}/src/pages`,
       },
     },
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
+        // Automatically generates github-style link icons next to headings
         gatsbyRemarkPlugins: [`gatsby-remark-autolink-headers`],
-        //remarkPlugins: [require("remark-autolink-headings")],
       },
     },
+    // For parsing .md files
     `gatsby-transformer-remark`,
+    // I forget what this is for
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
