@@ -30,7 +30,7 @@ import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef,
 <Command>tar -xf fruits.tar</Command>
 </CommandSession>
 
-### Compress a directory
+### Archive a directory
 
 <CommandSession>
 <Command>tar -<Flag
@@ -40,9 +40,9 @@ import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef,
 >z</Flag>f fruits.tar.gz fruits/</Command>
 </CommandSession>
 
-<Kw kw={3}>Compresses</Kw> the directory  <code>fruits/</code> to <Kw kw={2}>create</Kw> the file <code>fruits.tar.gz</code>.
+<Kw kw={2}>Create</Kw> the file <code>fruits.tar.gz</code> by <Kw kw={3}>compressing</Kw> the directory  <code>fruits/</code>.
 
-### Compress specific files
+### Archive specific files
 
 <CommandSession>
 <Command>tar -cxf fruits.tar.gz apple.png banana.png canteloupe.png</Command>

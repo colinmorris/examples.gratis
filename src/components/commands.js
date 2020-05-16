@@ -102,7 +102,7 @@ export const Flag = ({children, short, long, gloss, kw, ...props}) => {
   }
   const ttContent = (
       <>
-      {flagText && <p className="flags">{flagText}</p>}
+      {flagText && <p className="tt-flags">{flagText}</p>}
       {gloss && <p>{gloss}</p>}
       </>
   );
@@ -132,13 +132,20 @@ export const FileRef = ({children}) => (
 );
 
 export const SourceAnnot = ({children, text, ...props}) => {
-  // TODO: parse text as markdown
-  const tt_content = (<p>{text}</p>);
+  const inner = (
+    <KeySpan {...props}>
+      {children}
+    </KeySpan>
+  );
+  if (!props.tt && !text) {
+    return inner;
+  }
+  // TODO: parse text as markdown. Except, I should be doing this in advance,
+  // not on the client... Maybe for now just don't do the md thing.
+  const tt_content = props.tt || (<p>{text}</p>);
   return (
     <Popover content={tt_content}>
-      <KeySpan {...props}>
-        {children}
-      </KeySpan>
+      {inner}
     </Popover>
   );
 };

@@ -13,7 +13,7 @@ export default function Category(
   return (
     <Layout>
       <Breadcrumbs ancestry={ancestry} />
-      <h1>{category}</h1>
+      <h1>{category} examples</h1>
       <PageListing slugs={containedSlugs} />
     </Layout>
   );

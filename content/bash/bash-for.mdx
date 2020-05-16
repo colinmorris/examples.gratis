@@ -56,7 +56,10 @@ hello banana`}
 {`for line in $(seq 5)
 do
     echo `}
-<SourceAnnot text="**-n**: do not output the trailing newline">-n</SourceAnnot>
+<Flag
+  short='n'
+  gloss='do not output the trailing newline'
+  >-n</Flag>
 {` "$i "
 done`}
 </MultilineCommand>
