@@ -46,7 +46,26 @@ exports.createPages = async (helpers) => {
   createExamplePages(createPage, pages);
   createCategoryPages(createPage, pages);
   await createExtraMdPages(helpers);
+  createHomePage(createPage, reporter);
 }
+
+const createHomePage = (createPage, reporter) => {
+  const env = process.env.NODE_ENV;
+  if (env === 'production') {
+    createPage({
+      path: '/',
+      component: path.resolve('./src/templates/md.js'),
+      context: { slug: '/about' },
+    });
+  } else if (env === 'development') {
+    createPage({
+      path: '/',
+      component: path.resolve('./src/pages/directory.js'),
+    });
+  } else {
+    reporter.panicOnBuild('Unrecognized env: ' + env);
+  }
+};
 
 const createExtraMdPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
