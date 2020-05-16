@@ -6,6 +6,8 @@ import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef,
   SourceAnnot,
 } from '~components/commands'
 
+## Expanding
+
 ### Expand a `.tar.gz` file
 
 <CommandSession>
@@ -31,17 +33,36 @@ import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef,
 <Command>tar -xf fruits.tar</Command>
 </CommandSession>
 
+### Expand into a directory
+
+By default, `tar` expands into the current wording directory. Use the <Kw kw={3}><kbd>-C</kbd></Kw> flag to specify a different directory to extract files to.
+
+<CommandSession>
+<Command>tar -xf fruits.tar.gz <Flag
+  short='C'
+  long='directory'
+  gloss='Extract into the given directory'
+  kw={3}
+>-C fruit_pics</Flag></Command>
+<Command>ls</Command>
+<CommandOutput>fruits.tar.gz fruit_pics</CommandOutput>
+<Command>ls fruit_pics</Command>
+<CommandOutput>apple.png banana.png canteloupe.png</CommandOutput>
+</CommandSession>
+
+## Archiving
+
 ### Archive a directory
 
 <CommandSession>
 <Command>tar -<Flag
-  kw={2} short='c' long='create' gloss='create a new archive'
+  kw={1} short='c' long='create' gloss='create a new archive'
 >c</Flag><Flag
-  kw={3} short='z' long='gzip' gloss='use gzip compression'
+  kw={2} short='z' long='gzip' gloss='use gzip compression'
 >z</Flag>f fruits.tar.gz fruits/</Command>
 </CommandSession>
 
-<Kw kw={2}>Create</Kw> the file <code>fruits.tar.gz</code> by <Kw kw={3}>compressing</Kw> the directory  <code>fruits/</code>.
+<Kw kw={1}>Create</Kw> the file <code>fruits.tar.gz</code> by <Kw kw={2}>compressing</Kw> the directory  <code>fruits/</code>.
 
 ### Archive specific files
 
@@ -51,7 +72,7 @@ import { CommandSession, Command, CommandOutput, Flag, Gloss, Kw, FileRef,
 
 Creates a compressed tarball `fruits.tar.gz` containing the three specified image files.
 
-### List the contents of a tarball
+## List the contents of a tarball
 
 <CommandSession>
 <Command>tar -<Flag

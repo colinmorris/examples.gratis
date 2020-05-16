@@ -33,7 +33,6 @@ export default function Examples({
   // TODO: sort of hacky way of doing this.
   const sidebar = (
     <FloatingAnchorNav
-      headings={mdx.headings}
       tableOfContents={mdx.tableOfContents.items}
     />
   );
@@ -43,7 +42,7 @@ export default function Examples({
   let desc = front.description;
   if (!desc && front.command) {
     desc = `Basic examples of the unix command ${front.command}.`;
-  } else {
+  } else if (!desc) {
     console.warn("Couldn't generate meta description for");
   }
   return (
@@ -73,10 +72,6 @@ export const pageQuery = graphql`
     mdx(id: { eq: $id}) {
       id
       body
-      headings {
-        depth
-          value
-      }
       tableOfContents
       frontmatter {
         title
