@@ -4,19 +4,17 @@ import PropTypes from "prop-types";
 import { Menu } from 'antd';
 
 const Header = ({ siteTitle }) => (
-  <>
-    <Menu
-      mode="horizontal"
-      theme="dark"
-    >
-      <Menu.Item key={0}>
-        <Link
-          to="/"
-        > {siteTitle} </Link>
-      </Menu.Item>
+  <Menu
+    mode="horizontal"
+    theme="dark"
+  >
+    <Menu.Item key={0}>
+      <Link
+        to="/"
+      > {siteTitle} </Link>
+    </Menu.Item>
 
-    </Menu>
-  </>
+  </Menu>
 )
 
 Header.propTypes = {
