@@ -10,8 +10,6 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import { default as AntdLayout } from 'antd/lib/layout'
-import Row from 'antd/lib/row'
-import Col from 'antd/lib/col'
 
 
 import Header from "./header"

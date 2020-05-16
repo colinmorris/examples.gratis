@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
@@ -10,6 +10,7 @@ import FloatingAnchorNav from '~components/toc';
 //import './examples.css';
 
 // just a proof of concept experiment
+/*
 const Wrapper = ({children, ...props}) => {
   const mapped = React.Children.map(children, (child) => {
     return React.cloneElement(child, {
@@ -18,6 +19,7 @@ const Wrapper = ({children, ...props}) => {
   });
   return (<>{mapped}</>);
 };
+*/
 
 const components = {
   //wrapper: Wrapper,
