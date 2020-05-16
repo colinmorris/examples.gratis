@@ -26,7 +26,6 @@ export const Command = ({children}) => (
 // (and may want some special styling for them)
 //export const MultilineCommand = Command;
 export const MultilineCommand = ({children}) => {
-  console.log(children);
   const transformed = React.Children.map(children, (child, i) => {
     if (typeof(child) !== 'string') {
       return child;
