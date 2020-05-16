@@ -12,7 +12,8 @@ const CONTENT_URL_ROOT = "/";
 
 // Used example at https://www.gatsbyjs.org/docs/mdx/programmatically-creating-pages/#create-pages-from-sourced-mdx-files
 // as starting point.
-exports.createPages = async ({ graphql, actions, reporter }) => {
+exports.createPages = async (helpers) => {
+  const { graphql, actions, reporter } = helpers;
   // Destructure the createPage function from the actions object
   const { createPage } = actions
 
@@ -44,7 +45,40 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   createExamplePages(createPage, pages);
   createCategoryPages(createPage, pages);
+  await createExtraMdPages(helpers);
 }
+
+const createExtraMdPages = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions;
+  const result = await graphql(`
+    {
+      allMarkdownRemark {
+        edges {
+          node {
+            frontmatter {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `);
+  // Handle errors
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`);
+    return;
+  }
+  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    createPage({
+      path: node.frontmatter.slug,
+      component: path.resolve('./src/templates/md.js'),
+      context: {
+        // additional data can be passed via context
+        slug: node.frontmatter.slug,
+      },
+    });
+  });
+};
 
 const createCategoryPages = (createPage, edges) => {
   const cats = edges.reduce( (acc, {node}) => {
