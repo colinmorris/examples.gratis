@@ -86,7 +86,7 @@ const createExamplePages = (createPage, edges) => {
   });
 };
 
-exports.onCreateNode = ({ node, getNode, actions }) => {
+exports.onCreateNode = ({ node, getNode, actions, reporter }) => {
   const { createNodeField } = actions;
   if (node.internal.type === `Mdx`) {
     const parts = node.fileAbsolutePath.split('/');
