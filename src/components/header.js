@@ -15,9 +15,6 @@ const Header = ({ siteTitle }) => (
         > {siteTitle} </Link>
       </Menu.Item>
 
-      <Menu.Item key={1}>
-        <Link to="/404dev">404</Link>
-      </Menu.Item>
     </Menu>
   </>
 )
