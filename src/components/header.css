@@ -1,0 +1,10 @@
+span.header-majuscule {
+  font-size: 2.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-style: italic;
+}
+
+.header-title {
+  letter-spacing: .1px;
+  color: rgba(255, 255, 255, 0.65);
+}

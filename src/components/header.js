@@ -3,6 +3,8 @@ import { Link } from "gatsby";
 import PropTypes from "prop-types";
 import { Menu } from 'antd';
 
+import './header.css';
+
 const Header = ({ siteTitle }) => (
   <Menu
     mode="horizontal"
@@ -11,7 +13,10 @@ const Header = ({ siteTitle }) => (
     <Menu.Item key={0}>
       <Link
         to="/"
-      > {siteTitle} </Link>
+        className="header-title"
+      >
+        <span className="header-majuscule">e</span>xamples.<span className="header-majuscule">g</span>ratis
+      </Link>
     </Menu.Item>
 
   </Menu>
