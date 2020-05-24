@@ -1,6 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `Egg samples`,
+    title: `examples.gratis`,
+    // Pretty sure these fields aren't currently used anywhere
     description: `Description tk`,
     author: `colin`,
   },
