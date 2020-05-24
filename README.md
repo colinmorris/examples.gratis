@@ -5,6 +5,7 @@
   - `http://localhost:8000/___graphql` for GraphQL explorer
 - `gatsby build` to build the production site
 - `gatsby serve` to serve the production site
+- `npm run deploy` builds the production site, and syncs the generated `public/` directory to the `gh-pages` branch
 
 ## Overview
 
